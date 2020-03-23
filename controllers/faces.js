@@ -1,7 +1,7 @@
 const handleFaces = (req, res, db) => {
     const {id, facesFound} = req.body;
     db('users').where('id', '=', id)
-    .increment('faces', 1)
+    .increment('faces', 2)
     .returning('faces')
     .then(faces => {
         res.json(faces[0]);
