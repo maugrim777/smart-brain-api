@@ -14,7 +14,7 @@ const handleRegistrationMail = (req,res) => {
             {
               to: [
                 {
-                  email: email,
+                  email: 'gabriel.vlasceanu@outlook.com',
                 },
               ],
               subject: 'Hello World from the SendGrid Node.js Library!',
