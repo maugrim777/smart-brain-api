@@ -3,7 +3,9 @@ const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex');
 
-
+// temp test
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const register = require('./controllers/register');
 const signin = require('./controllers/signin')
@@ -40,4 +42,19 @@ app.post('/registerMail', (req,res) => {registrationMail.handleRegistrationMail(
 app.listen(process.env.PORT || 3002, () => {
     console.log(`app is running on port ${process.env.PORT}`)
 });
+
+
+
+app.post('/sendMail', (req, res) => {
+  const {email} = req.body;
+  const msg = {
+      to: email,
+      from: 'test@test.com',
+      subject: 'Hello real world',
+      text: 'Hello plain world!',
+      html: '<p>Hello HTML world!</p>',
+    };
+  sgMail.send(msg).then(data => console.log(data)).then(() => {res.json('message sent')}).catch(err => res.status(400).json('couldn\'t send mail'))
+  
+})
 
