@@ -21,7 +21,7 @@ const handleRegistrationMail = (req,res) => {
             },
           ],
           from: {
-            email: 'test@example.com',
+            email: 'gabriel.vlasceanu@outlook.com',
           },
           content: [
             {
