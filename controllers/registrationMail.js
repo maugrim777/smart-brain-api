@@ -1,22 +1,51 @@
-const sgMail = require('@sendgrid/mail');
-
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
 
 
-const handleRegistrationMail = (req, res) => {
+//With promise
+
+const handleRegistrationMail = (req,res) => {
     const {name, email} = req.body;
-    console.log(email, name)
-    const msg = {
-        to: email,
-        from: 'registration@facerecognitionapp.com',
-        subject: `Hellloooo! `,
-        text: `Hello. So glad you registered in my little app. Have fun!`
-    };
-    sgMail.send(msg).then(response => res.json(response)).catch(err => res.status(400).json('couldn\'t send mail'))
-    
+    console.log(email)
+    var request = sg.emptyRequest({
+        method: 'POST',
+        path: '/v3/mail/send',
+        body: {
+          personalizations: [
+            {
+              to: [
+                {
+                  email: email,
+                },
+              ],
+              subject: 'Hello World from the SendGrid Node.js Library!',
+            },
+          ],
+          from: {
+            email: 'test@example.com',
+          },
+          content: [
+            {
+              type: 'text/plain',
+              value: 'Hello, Email!',
+            },
+          ],
+        },
+      });
+
+    sg.API(request)
+    .then(response => {
+        console.log(response.statusCode);
+        console.log(response.body);
+        console.log(response.headers);
+        res.json('mail sent')
+    })
+    .catch(error => {
+        //error is an instance of SendGridError
+        //The full response is attached to error.response
+        console.log(error.response.statusCode);
+    });
 }
 
-
 module.exports = {
-    handleRegistrationMail:handleRegistrationMail
+    handleRegistrationMail: handleRegistrationMail
 }

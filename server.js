@@ -3,10 +3,6 @@ const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex');
 
-// to be deleted
-const sgMail = require('@sendgrid/mail');
-// sgMail.setApiKey('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')
-sgMail.setApiKey('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')
 
 
 const register = require('./controllers/register');
