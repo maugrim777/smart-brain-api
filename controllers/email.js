@@ -7,11 +7,11 @@ function newUserEmail(req, res){
     console.log(email)
     const message = { 
     to : email, //email variable
-    from : { email : 'gabriel.vlasceanu@outlook.com' , name: 'Gabriel Vlasceanu'},
+    from : { email : 'gv.maugrim777@gmail.com' , name: 'Gabriel Vlasceanu'},
     message : `Hi there, ${name}`,
-    subject : "This is a test Email",
-    text: 'and easy to do anywhere, even with Node.js',
-    html: '<strong>and easy to do anywhere, even with Node.js</strong>'
+    subject : "Heeellllooooo!",
+    text: `Hi ${name}! Thank you for registering to the FaceRecognitionApp! Glad you could join us!`,
+    html: `<strong>Hi ${name}! Thank you for registering to the FaceRecognitionApp! Glad you could join us!</strong>`
     }
     console.log(message)
     sgMail.send(message).catch(err => console.log(err)).then((sent) => {
