@@ -37,7 +37,7 @@ const recoverPassword = (req, res, db, bcrypt) => {
           if (data[0]) {
             //insert hash in table column recovery_hash
             var hash = bcrypt.hashSync(email);
-            hash.replace(/\//g, "slash");
+            hash = hash.replace(/\//g, "slash");
             db.select('email').from('login').where('email', '=', email).update({'recovery_hash':hash}).catch(err => console.log(err))
             //configure email message
             const message = { 
