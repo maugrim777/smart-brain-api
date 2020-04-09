@@ -33,6 +33,9 @@ app.put('/image', (req, res) => {image.handleImage(req,res, db)});
 app.post('/imageurl', (req, res) => {image.handleApiCall(req,res)});
 app.put('/faces', (req, res) => {faces.handleFaces(req,res, db)});
 app.post('/sendMail', (req, res) => {email.newUserEmail(req,res)});
+app.post('/recoverPassword', (req,res) => {email.recoverPassword(req,res,db,bcrypt)})
+app.post('/reset', (req,res) => {email.resetPassword(req,res,db,bcrypt)})
+
 
 
 app.listen(process.env.PORT || 3002, () => {
